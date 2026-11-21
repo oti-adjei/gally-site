@@ -175,6 +175,21 @@ document.addEventListener('input',e=>{if(e.target.id==='quick-text')quickPreview
 document.addEventListener('change',async e=>{let id=e.target.id;if(id==='entry-account'&&draft?.mode==='quick')quickPreview();if(id==='entry-from')transferOptions();if(id==='forecast-account'){ui.forecastAccount=e.target.value;render()}if(id==='csv-file'&&e.target.files[0]){let f=e.target.files[0];try{showImportReading(f.name);const contents=await f.text();loadCSV(contents,f.name)}catch{$('#import-error').hidden=false;$('#import-error').textContent='Could not read this file. Try another CSV.'}}if(id==='restore-file'&&e.target.files[0]){try{let d=JSON.parse(await e.target.files[0].text());if(!validBackup(d))throw Error('Choose a complete Gally prototype backup with valid account and transaction data.');restoreData=d;openSheet('Review your backup',`<p class="help-block">This file contains ${d.accounts.length} accounts, ${d.tx.length} transaction records and ${d.goals.length} goals.</p><p class="notice">Restore replaces your current ledger. It does not merge. You will confirm once more before replacement.</p><div class="actions">${btn('Cancel','close','secondary')}${btn('Continue to restore','restore-final','primary')}</div>`)}catch(err){$('#restore-error').hidden=false;$('#restore-error').textContent=err.message}}});
 document.addEventListener('keydown',e=>{if(!$('#overlay').hidden){if(e.key==='Escape'){e.preventDefault();closeSheet();return}if(e.key==='Tab'){let focusable=Array.from($('#overlay').querySelectorAll('button:not(:disabled),input:not(:disabled),select:not(:disabled),textarea,a[href],[tabindex="0"]')).filter(n=>n.getClientRects().length),first=focusable[0],last=focusable.at(-1);if(e.shiftKey&&document.activeElement===first){e.preventDefault();last?.focus()}else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first?.focus()}}if(e.key==='Enter'&&e.target.tagName==='INPUT'&&!['file','range'].includes(e.target.type)){let action=$('#sheet-body [data-action="entry-review"]')||$('#sheet-body .primary');if(action&&!action.disabled){e.preventDefault();action.click()}}}});
 $('#overlay').addEventListener('click',e=>{if(e.target.id==='overlay')closeSheet()});
+// ── SITE DEMO PATCH (gally-site only) ──────────────────────────────────────
+// The public demo is a taste, not the meal. Surface: Home (Today + Look
+// ahead), quick capture, the ledger, and the attention-catchers — expected
+// money and the forecast. Management screens live in the app.
+const DEMO_PAGES=new Set(['home','ledger','forecast','expected']);
+if(!db.accounts.length && !localStorage.getItem('gally-demo-seen')){
+  localStorage.setItem('gally-demo-seen','1');
+  try{beginDemo();}catch(e){/* sample data is optional */}
+}
+const _siteRender=render;
+render=function(){
+  if(!DEMO_PAGES.has(ui.page))ui.page='home';
+  _siteRender();
+};
+// ── END SITE DEMO PATCH ────────────────────────────────────────────────────
 ui.currency=db.defaultCurrency||'GHS';
 render();
 globalThis.gallyBooted=true;
