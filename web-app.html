@@ -1,0 +1,67 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#184d3d"><title>Gally — Your browser notebook</title><link rel="icon" href="assets/brand/app-icon.svg" type="image/svg+xml"><style>/* OD-LAYOUT-PRIMITIVES v1 — structure only: display, flex/grid, overflow, wrapping, ratio, geometry.
+   Put this @layer first; product CSS outside the layer wins ordinary layout rules.
+   Native hidden and closed-dialog states take precedence over component display rules. */
+@layer od-layout {
+  [hidden]:not([hidden="until-found" i]) { display: none !important; }
+  dialog:not([open]) { display: none !important; }
+
+  :where(.od-stack,.od-row,.od-row-top,.od-cluster,.od-grid,.od-field,.od-stat,.od-cell,.od-tile) > :where(*) { min-width: 0; }
+
+  /* containers */
+  .od-stack   { display: flex; flex-direction: column; gap: var(--od-gap, 8px); }
+  .od-row     { display: flex; align-items: center; gap: var(--od-gap, 8px); }
+  .od-row-top { display: flex; align-items: flex-start; gap: var(--od-gap, 8px); }
+  .od-cluster { display: flex; flex-wrap: wrap; align-items: center; gap: var(--od-gap, 8px); }
+  .od-fill    { flex: 1 1 0; min-width: 0; }
+  .od-fixed   { flex: none; }
+  .od-grid    { display: grid; gap: var(--od-gap, 12px); grid-template-columns: repeat(var(--od-cols, 3), minmax(0, 1fr)); }
+
+  /* stacked information: each piece is its own line — never sibling inline spans */
+  .od-stat, .od-field, .od-cell { display: grid; gap: var(--od-gap, 2px); }
+  :where(.od-stat,.od-field,.od-cell) > :where(*) { display: block; }
+  .od-tile { display: grid; grid-template-rows: auto 1fr; }
+  :where(.od-tile) > :where(*) { display: block; }
+
+  /* media keeps its intrinsic ratio by default; never a distorted or cropped
+     cover by accident. height:auto lets the ratio win over an <img height="…">
+     attribute. Cropping to a uniform box is an explicit opt-in: set --od-ratio
+     AND add .od-media-cover together (per the core rule, only where a crop is
+     deliberate — tile thumbs, decorative fills — never on full-frame content). */
+  .od-media { display: block; width: 100%; height: auto; aspect-ratio: var(--od-ratio, auto); }
+  .od-media-cover { object-fit: cover; }
+
+  /* functional inline SVG icons opt into bounded geometry; content SVGs keep their own */
+  .od-icon { display: inline-block; inline-size: var(--od-icon-size, 1em); block-size: var(--od-icon-size, 1em); flex: none; }
+
+  /* data text only — authored copy is rewritten to its budget instead */
+  .od-truncate { display: block; max-width: 100%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+  .od-clamp-2, .od-clamp-3 { display: -webkit-box; -webkit-box-orient: vertical; overflow: hidden; overflow-wrap: anywhere; }
+  .od-clamp-2 { -webkit-line-clamp: 2; }
+  .od-clamp-3 { -webkit-line-clamp: 3; }
+  .od-lines-2 { min-height: calc(2 * 1.4em); }   /* block-level reservation for a shared baseline */
+  .od-nowrap  { white-space: nowrap; }           /* 数字+单位 · 价格+起 · 日期+星期 */
+  .od-keep    { word-break: keep-all; overflow-wrap: anywhere; } /* CJK labels break at spaces / <wbr> first */
+
+  /* screen skeleton (optional): bars take their own space, the middle scrolls — no padding guessed for chrome */
+  .od-screen { display: grid; grid-template-rows: auto minmax(0, 1fr) auto; height: 100%; }
+  .od-scroll { overflow-y: auto; overscroll-behavior: contain; min-height: 0; }
+
+  /* horizontal rail: the next item peeks at the edge; trailing room survives overflow */
+  .od-rail { display: flex; gap: var(--od-gap, 8px); overflow-x: auto; scroll-snap-type: x proximity; scrollbar-width: none;
+             padding-inline: var(--od-rail-pad, 16px); scroll-padding-inline: var(--od-rail-pad, 16px); }
+  .od-rail::-webkit-scrollbar { display: none; }
+  :where(.od-rail) > :where(*) { flex: none; scroll-snap-align: start; }
+  :where(.od-rail) > :where(:last-child) { margin-inline-end: var(--od-rail-pad, 16px); }
+
+  .od-spacer { flex: none; visibility: hidden; pointer-events: none; }
+  .od-touch  { min-width: 44px; min-height: 44px; }
+}
+:root [hidden]:where(:not([hidden="until-found" i])) { display: none; }
+/* /OD-LAYOUT-PRIMITIVES v1 */
+</style><link rel="stylesheet" href="app.css"><link rel="stylesheet" href="web-app.css"><link rel="stylesheet" href="desktop-onboarding.css"><link rel="stylesheet" href="gally-motion.css"><link rel="stylesheet" href="mote-fields.css"><link rel="stylesheet" href="pip.css"><link rel="stylesheet" href="pip-presence.css"><link rel="stylesheet" href="gally-controls.css"><link rel="stylesheet" href="mobile-fit.css"><link rel="stylesheet" href="pip-character.css"><link rel="stylesheet" href="pip-spaces.css"></head><body><a class="web-skip" href="#content">Skip to notebook</a><div class="web-shell"><aside class="web-sidebar" id="web-sidebar" role="navigation" aria-label="Workspace navigation"><a class="wordmark" href="index.html">gally.</a><p class="help-block">Your money, your file.</p></aside><main class="web-main"><div class="app" id="app"><header class="topbar" id="topbar"></header><div class="scroller" id="content" aria-label="Gally screen"><section class="boot-panel"><span class="label">Your money, your file.</span><h1>Your money.<br>Your pace.</h1><p id="boot-message" role="status">Opening your private notebook…</p><a href="web-app.html" id="boot-retry" hidden>Try opening again</a><noscript><p>Gally needs JavaScript for its local interactions. Enable it to open the notebook. No sign-up or network connection is needed.</p></noscript></section></div><nav class="nav" id="nav" aria-label="Main navigation"></nav></div></main></div>      <div class="overlay" id="overlay" hidden role="dialog" aria-modal="true" aria-labelledby="sheet-title"><section class="sheet"><div class="sheet-handle" aria-hidden="true"></div><div class="sheet-head"><h2 id="sheet-title"></h2><button class="icon-btn" id="sheet-close" data-action="close" aria-label="Close sheet"><svg class="od-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="m6 6 12 12M6 18 18 6"/></svg></button></div><div class="sheet-body" id="sheet-body"></div></section></div>
+      <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+      <div id="gally-splash" class="gally-splash" aria-hidden="true" hidden><svg class="splash-mark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 64" fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"><path d="M28 22c-12-10-26-2-26 10s14 20 25 10V31H15M37 16v30"/></svg><span class="splash-word">gally.</span><p>Your money, your file.</p></div>
+<script>
+window.addEventListener('error',function(){if(window.gallyBooted)return;var message=document.getElementById('boot-message');var retry=document.getElementById('boot-retry');if(message)message.textContent="Gally couldn't finish opening. Your saved data has not been cleared. Try opening again, or open the design-system reference from your project files.";if(retry)retry.hidden=false;},true);
+</script>
+<script src="companion-config.js"></script><script src="experience.js"></script><script src="pip-character.js"></script><script src="pip.js"></script><script src="pip-presence.js"></script><script src="planning.js"></script><script src="pip-flows.js"></script><script src="app.js"></script><script src="web-app.js"></script><script src="desktop-onboarding.js"></script><script src="gally-motion.js"></script><script src="assets/vendor/mote/mote-fintech.js"></script><script src="gally-controls.js"></script><script src="gally-date.js"></script><script src="mobile-fit.js"></script><script src="pip-mote-pack.js"></script><script src="pip-spaces.js"></script><script src="mote-fields.js"></script></body></html>

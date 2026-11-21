@@ -1,0 +1,61 @@
+/* Generated design reference: canonical role names map directly to Flutter ColorScheme. */
+:root {
+  --md-sys-color-primary: #184D3D;
+  --md-sys-color-onPrimary: #FFFFFF;
+  --md-sys-color-primaryContainer: #DFF3E9;
+  --md-sys-color-onPrimaryContainer: #143C30;
+  --md-sys-color-secondary: #D9ED92;
+  --md-sys-color-onSecondary: #243219;
+  --md-sys-color-secondaryContainer: #EEF5D9;
+  --md-sys-color-onSecondaryContainer: #34451D;
+  --md-sys-color-tertiary: #526D79;
+  --md-sys-color-onTertiary: #FFFFFF;
+  --md-sys-color-tertiaryContainer: #E4EFF3;
+  --md-sys-color-onTertiaryContainer: #243E49;
+  --md-sys-color-error: #AE343A;
+  --md-sys-color-onError: #FFFFFF;
+  --md-sys-color-errorContainer: #FBE9E9;
+  --md-sys-color-onErrorContainer: #842329;
+  --md-sys-color-background: #FFFFFF;
+  --md-sys-color-onBackground: #182E27;
+  --md-sys-color-surface: #FFFFFF;
+  --md-sys-color-onSurface: #182E27;
+  --md-sys-color-surfaceVariant: #F1F5F2;
+  --md-sys-color-onSurfaceVariant: #5E6E66;
+  --md-sys-color-surfaceContainer: #F1F5F2;
+  --md-sys-color-outline: #718078;
+  --md-sys-color-outlineVariant: #DDE5DF;
+  --md-sys-color-inverseSurface: #182E27;
+  --md-sys-color-inverseOnSurface: #F1F5F2;
+  --md-sys-color-scrim: #0A1B14;
+}
+[data-theme="dark"] {
+  --md-sys-color-primary: #ACD5BD;
+  --md-sys-color-onPrimary: #10382B;
+  --md-sys-color-primaryContainer: #244F3D;
+  --md-sys-color-onPrimaryContainer: #DFF3E9;
+  --md-sys-color-secondary: #D9ED92;
+  --md-sys-color-onSecondary: #243219;
+  --md-sys-color-secondaryContainer: #34451D;
+  --md-sys-color-onSecondaryContainer: #EEF5D9;
+  --md-sys-color-tertiary: #B1CEDA;
+  --md-sys-color-onTertiary: #19343F;
+  --md-sys-color-tertiaryContainer: #324F5B;
+  --md-sys-color-onTertiaryContainer: #E4EFF3;
+  --md-sys-color-error: #FFB3B6;
+  --md-sys-color-onError: #620E18;
+  --md-sys-color-errorContainer: #4D252A;
+  --md-sys-color-onErrorContainer: #FFDADB;
+  --md-sys-color-background: #14221C;
+  --md-sys-color-onBackground: #EBF1EC;
+  --md-sys-color-surface: #14221C;
+  --md-sys-color-onSurface: #EBF1EC;
+  --md-sys-color-surfaceVariant: #20332A;
+  --md-sys-color-onSurfaceVariant: #B8C6BC;
+  --md-sys-color-surfaceContainer: #20332A;
+  --md-sys-color-outline: #8F9F94;
+  --md-sys-color-outlineVariant: #3C4C41;
+  --md-sys-color-inverseSurface: #EBF1EC;
+  --md-sys-color-inverseOnSurface: #14221C;
+  --md-sys-color-scrim: #06100B;
+}

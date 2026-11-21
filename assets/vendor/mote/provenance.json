@@ -1,0 +1,13 @@
+{
+  "library": "Mote",
+  "author": "George Heavenson",
+  "homepage": "https://mote.hearvie.dev/",
+  "repository": "https://github.com/oti-adjei/mote",
+  "packages": {"@usemote/core": "0.1.1", "@usemote/pack-fintech": "0.1.1"},
+  "license": "MIT",
+  "licenseFile": "LICENSE",
+  "bundle": "mote-fintech.js",
+  "format": "local IIFE, global GallyMoteLibrary",
+  "modifications": "No upstream renderer or shape path changes. Gally selects shapes, sets its own theme stops and restricts the decorative currency variant to GHS.",
+  "role": "Decorative background component; no financial data or network requests"
+}

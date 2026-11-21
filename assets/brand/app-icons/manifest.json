@@ -1,0 +1,18 @@
+{
+  "version": "1.0",
+  "variants": [
+    "original",
+    "forest",
+    "mint",
+    "citron",
+    "monochrome"
+  ],
+  "canvas": [
+    108,
+    108
+  ],
+  "foregroundPattern": "{variant}-foreground.svg",
+  "backgroundPattern": "{variant}-background.svg",
+  "monochrome": "adaptive-monochrome.svg",
+  "note": "Editable vector source. Native launcher resources and raster exports are not built."
+}

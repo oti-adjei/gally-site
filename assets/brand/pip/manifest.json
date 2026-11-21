@@ -1,0 +1,39 @@
+{
+  "name": "Pip",
+  "version": "1.1.0",
+  "format": "editable SVG",
+  "background": "transparent",
+  "fullCanvas": [
+    320,
+    336
+  ],
+  "compactCanvas": [
+    64,
+    64
+  ],
+  "states": [
+    "ready",
+    "listening",
+    "review",
+    "thinking",
+    "replying",
+    "interrupted",
+    "unavailable"
+  ],
+  "palette": {
+    "forest": "#184D3D",
+    "mint": "#DFF3E9",
+    "citron": "#D9ED92"
+  },
+  "default": "character.svg",
+  "compact": "compact.svg",
+  "role": "Gally money companion; separate from app logo",
+  "source": "Original code-authored vector artwork",
+  "personalities": {
+    "guy": "Forest cap with citron brim",
+    "girl": "Citron headband and knot",
+    "coach": "Forest vest with citron trim",
+    "quiet": "Unadorned silhouette and softer eyes"
+  },
+  "personalityAssets": "personalities/{personality}-{state}[-compact].svg"
+}
